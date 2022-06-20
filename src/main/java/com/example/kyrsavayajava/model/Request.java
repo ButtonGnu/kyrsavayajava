@@ -1,6 +1,6 @@
 package com.example.kyrsavayajava.model;
 
-import com.example.kyrsavayajava.util.ExecutionState;
+import com.example.kyrsavayajava.util.ExecutionStage;
 import com.example.kyrsavayajava.util.RequestStatus;
 
 public class Request {
@@ -8,7 +8,7 @@ public class Request {
 
     private long customerId;
     private long employeeId;
-    private ExecutionState executionState;
+    private ExecutionStage executionState;
     private RequestStatus requestStatus;
 
     public long getId() {
@@ -35,11 +35,11 @@ public class Request {
         this.employeeId = employeeId;
     }
 
-    public ExecutionState getExecutionState() {
+    public ExecutionStage getExecutionState() {
         return executionState;
     }
 
-    public void setExecutionState(ExecutionState executionState) {
+    public void setExecutionState(ExecutionStage executionState) {
         this.executionState = executionState;
     }
 
