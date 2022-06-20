@@ -1,10 +1,19 @@
 package com.example.kyrsavayajava.model;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
+@Entity
+@Table(name="damages")
 public class Damage {
+    @Id
+    @GeneratedValue
+    private long id;
+    @Column(name="damage_category")
     private String category;
+    @OneToMany(mappedBy = "damage")
     private List<DamageSubCategory> subCategories;
 
     public String getCategory() {
@@ -13,6 +22,10 @@ public class Damage {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public List<DamageSubCategory> getSubCategories() {
@@ -34,5 +47,14 @@ public class Damage {
     @Override
     public int hashCode() {
         return Objects.hash(category, subCategories);
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+    public Long getId() {
+        return id;
     }
 }

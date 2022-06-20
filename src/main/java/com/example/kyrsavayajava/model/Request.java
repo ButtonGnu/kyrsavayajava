@@ -3,13 +3,29 @@ package com.example.kyrsavayajava.model;
 import com.example.kyrsavayajava.util.ExecutionStage;
 import com.example.kyrsavayajava.util.RequestStatus;
 
-public class Request {
-    private long id;
+import javax.persistence.*;
+import java.util.Set;
 
-    private long customerId;
-    private long employeeId;
-    private ExecutionStage executionState;
+@Entity
+@Table(name = "requests")
+public class Request {
+    @Id
+    @GeneratedValue
+    private long id;
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false)
+    private Employee employee;
+    @Column(name = "execution_stage")
+    @Enumerated(EnumType.STRING)
+    private ExecutionStage executionStage;
+    @Column(name = "request_status")
+    @Enumerated(EnumType.STRING)
     private RequestStatus requestStatus;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
+    @OneToMany(mappedBy = "request")
+    private Set<Damage> damages;
 
     public long getId() {
         return id;
@@ -19,28 +35,12 @@ public class Request {
         this.id = id;
     }
 
-    public long getCustomerId() {
-        return customerId;
+    public ExecutionStage getExecutionStage() {
+        return executionStage;
     }
 
-    public void setCustomerId(long customerId) {
-        this.customerId = customerId;
-    }
-
-    public long getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(long employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public ExecutionStage getExecutionState() {
-        return executionState;
-    }
-
-    public void setExecutionState(ExecutionStage executionState) {
-        this.executionState = executionState;
+    public void setExecutionStage(ExecutionStage executionState) {
+        this.executionStage = executionState;
     }
 
     public RequestStatus getRequestStatus() {
@@ -49,5 +49,21 @@ public class Request {
 
     public void setRequestStatus(RequestStatus requestStatus) {
         this.requestStatus = requestStatus;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

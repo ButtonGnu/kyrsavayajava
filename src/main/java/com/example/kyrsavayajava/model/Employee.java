@@ -2,12 +2,24 @@ package com.example.kyrsavayajava.model;
 
 import com.example.kyrsavayajava.util.JobPosition;
 
-public class Employee {
+import javax.persistence.*;
+import java.util.Set;
 
+@Entity
+@Table(name = "employees")
+public class Employee {
+    @Id
+    @GeneratedValue
     private long id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "job_position")
     private JobPosition jobPosition;
+    @OneToMany(mappedBy = "cart")
+    private Set<Request> requests;
+
 
     public long getId() {
         return id;
